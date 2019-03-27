@@ -18,7 +18,7 @@ namespace WebAdressbookTests
         public void SetupTest()
         {
             driver = new FirefoxDriver();
-            baseURL = "http://localhost/addressbook/";
+            baseURL = "http://localhost/";
             verificationErrors = new StringBuilder();
         }
 
@@ -41,9 +41,9 @@ namespace WebAdressbookTests
         {
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
-            NewContactData member = new NewContactData("aaa");
-            member.FirstName = "ggg";
-            member.LastName = "eee";
+            NewContactData member = new NewContactData("IvanovIvanIvanovich");
+            member.FirstName = "Gideon";
+            member.LastName = "Reyvenor";
             InitContactCreation(member);
             LogoutFromContactCreation();
         }
@@ -69,7 +69,7 @@ namespace WebAdressbookTests
 
         private void OpenHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL);
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
         }
 
         private void Login(AccountData account)
