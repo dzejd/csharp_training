@@ -67,7 +67,6 @@ namespace WebAdressbookTests
 
         private void FillGroupForm(GroupData group)
         {
-
             driver.FindElement(By.Name("group_name")).Clear();
             driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
             driver.FindElement(By.Name("group_header")).Clear();

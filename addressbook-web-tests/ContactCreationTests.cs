@@ -41,16 +41,30 @@ namespace WebAdressbookTests
         {
             OpenHomePage();
             Login(new AccountData("admin", "secret"));
+            AddNewContact();
             NewContactData member = new NewContactData("IvanovIvanIvanovich");
             member.FirstName = "Gideon";
             member.LastName = "Reyvenor";
             InitContactCreation(member);
+            SubmitAdd();
+            BackHomePage();
             LogoutFromContactCreation();
         }
+
 
         private void LogoutFromContactCreation()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+        private void BackHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
+
+        private void SubmitAdd()
+        {
+            driver.FindElement(By.Name("theform")).Click();
         }
 
         private void InitContactCreation(NewContactData member)
