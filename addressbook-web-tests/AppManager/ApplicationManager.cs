@@ -10,7 +10,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAdressbookTests
 {
-    public class ApplicationMeneger
+    public class ApplicationManager
     {
         protected IWebDriver driver;
         protected string baseURL;
@@ -20,12 +20,23 @@ namespace WebAdressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
-        public ApplicationMeneger()
+        public ApplicationManager()
         {
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            driver = new FirefoxDriver();
+            baseURL = "http://localhost";
+
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+        }
+
+        public IWebDriver Driver
+        {
+            get
+            {
+                return driver;
+            }
         }
 
         public void Stop()
@@ -71,6 +82,5 @@ namespace WebAdressbookTests
                 return contactHelper;
             }
         }
-
     }
 }

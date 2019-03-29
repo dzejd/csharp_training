@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 
 
 
@@ -11,12 +14,14 @@ namespace WebAdressbookTests
 {
     public class TestBase
     {
-        protected ApplicationMeneger app;
+        protected ApplicationManager app;
 
         [SetUp]
         public void SetupTest()
         {
-            app = new ApplicationMeneger();
+            app = new ApplicationManager();
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
         }
 
         [TearDown]

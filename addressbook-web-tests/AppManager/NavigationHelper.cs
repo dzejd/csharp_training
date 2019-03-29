@@ -12,18 +12,18 @@ namespace WebAdressbookTests
 {
     public class NavigationHelper : HelperBase
 
-    {       
-        public string baseURL { get; private set; }
+    {
+        public string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL)
-            : base(driver)
+        public NavigationHelper(ApplicationManager manager, string baseURL)
+            : base(manager)
         {
             this.baseURL = baseURL;
         }
 
         public void GoToHomePage()
         {
-            driver.Navigate().GoToUrl(baseURL + "/addressbook/");
+            driver.Navigate().GoToUrl(baseURL + "/addressbook/group.php");
         }
 
         public void GoToGroupPage()

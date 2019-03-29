@@ -12,40 +12,43 @@ namespace WebAdressbookTests
 {
     public class ContactHelper : HelperBase
     {
-        private IWebDriver driver;
-
-        public ContactHelper(IWebDriver driver)
-            : base(driver)
+        public ContactHelper(ApplicationManager manager)
+         : base(manager)
         {
         }
 
-        public void AddNewContact()
+        public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
         }
 
-        public void InitContactCreation(NewContactData member)
+        public ContactHelper InitContactCreation(NewContactData member)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(member.FirstName);
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(member.LastName);
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            return this;
         }
 
-        public void LogoutFromContactCreation()
+        public ContactHelper LogoutFromContactCreation()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
+            return this;
         }
 
-        public void BackHomePage()
+        public ContactHelper BackHomePage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
 
-        public void SubmitAdd()
+        public ContactHelper SubmitAdd()
         {
-            driver.FindElement(By.Name("theform")).Click();
+            driver.FindElement(By.XPath("(//input[@name='submit'])[]")).Click();
+            return this;
         }
 
 

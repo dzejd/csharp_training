@@ -69,9 +69,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactHelper.cs" />
+    <Compile Include="AppManager\ContactHelper.cs" />
     <Compile Include="Model\AccountData.cs" />
-    <Compile Include="AppManager\ApplicationMeneger.cs" />
+    <Compile Include="AppManager\ApplicationManager.cs" />
     <Compile Include="Model\ContactData.cs" />
     <Compile Include="Model\GroupData.cs" />
     <Compile Include="AppManager\GroupHelper.cs" />
