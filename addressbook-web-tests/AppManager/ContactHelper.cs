@@ -17,6 +17,19 @@ namespace WebAdressbookTests
         {
         }
 
+        public ContactHelper CreateMember(NewContactData member)
+        {
+            manager.Navigator.GoToGroupPage();
+
+            AddNewContact();
+            InitContactCreation(member);
+            SubmitAdd();
+            BackHomePage();
+            return this;
+        }
+
+
+
         public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -29,13 +42,12 @@ namespace WebAdressbookTests
             driver.FindElement(By.Name("firstname")).SendKeys(member.FirstName);
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(member.LastName);
-            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
             return this;
         }
 
-        public ContactHelper LogoutFromContactCreation()
+        public ContactHelper SubmitAdd()
         {
-            driver.FindElement(By.LinkText("Logout")).Click();
+            driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
             return this;
         }
 
@@ -44,13 +56,5 @@ namespace WebAdressbookTests
             driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
-
-        public ContactHelper SubmitAdd()
-        {
-            driver.FindElement(By.XPath("(//input[@name='submit'])[]")).Click();
-            return this;
         }
-
-
-    }
 }

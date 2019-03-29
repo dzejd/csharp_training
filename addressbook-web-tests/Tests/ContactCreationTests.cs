@@ -20,12 +20,7 @@ namespace WebAdressbookTests
             NewContactData member = new NewContactData("IvanovIvanIvanovich");
             member.FirstName = "Gideon";
             member.LastName = "Reyvenor";
-            app.Contacts
-                .AddNewContact()
-                .InitContactCreation(member)
-                .SubmitAdd()
-                .BackHomePage()
-                .LogoutFromContactCreation();
+            app.Contacts.CreateMember(member);
         }
     }
 }

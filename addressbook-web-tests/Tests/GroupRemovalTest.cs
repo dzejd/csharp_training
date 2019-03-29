@@ -13,12 +13,7 @@ namespace WebAdressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            app.Groups.Remove(1);
-            app.Navigator.GoToGroupPage();
-            app.Groups
-                .SelectGroup(1)
-                .RemoveGroup()
-                .ReturnHomePage();
+            app.Groups.Remove(2);
         }
     }
 }
