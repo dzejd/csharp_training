@@ -31,5 +31,9 @@ namespace WebAdressbookTests
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
+        public void BackHomePage()
+        {
+            driver.FindElement(By.LinkText("home page")).Click();
+        }
     }
 }

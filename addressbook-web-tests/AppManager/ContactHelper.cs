@@ -23,7 +23,7 @@ namespace WebAdressbookTests
             AddNewContact();
             InitContactCreation(member);
             SubmitAdd();
-            BackHomePage();
+            manager.Navigator.BackHomePage();
             return this;
         }
 
@@ -42,7 +42,7 @@ namespace WebAdressbookTests
             InitContactModification();
             InitContactCreation(newContact);
             UpdateContactInfo();
-            BackHomePage();
+            manager.Navigator.BackHomePage();
             return this;
         }
 
@@ -83,12 +83,6 @@ namespace WebAdressbookTests
         public ContactHelper SubmitAdd()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
-            return this;
-        }
-
-        public ContactHelper BackHomePage()
-        {
-            driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
 
