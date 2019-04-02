@@ -18,7 +18,7 @@ namespace WebAdressbookTests
             newMember.FirstName = "Homo";
             newMember.LastName = "Parodic";
 
-            app.Contacts.Modify(1, newMember);
+            app.Contacts.Modify(newMember);
         }
     }
 }

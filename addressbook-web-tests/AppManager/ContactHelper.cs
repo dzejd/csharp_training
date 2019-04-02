@@ -36,7 +36,7 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper Modify(int v, NewContactData newContact)
+        public ContactHelper Modify(NewContactData newContact)
         {
             manager.Navigator.GoToHomePage();
             InitContactModification();
