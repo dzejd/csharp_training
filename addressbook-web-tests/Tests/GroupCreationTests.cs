@@ -9,14 +9,14 @@ namespace WebAdressbookTests
 {
     [TestFixture]
 
-    public class GroupCreationTests : TestBase
+    public class GroupCreationTests : AuthTestBase
     {
         [Test]
         public void GroupCreationTest()
         {
             GroupData group = new GroupData("fykfky");
-            group.Header = "ggg";
-            group.Footer = "djtdtjdj";
+            group.Header = null;
+            group.Footer = null;
             app.Groups.Create(group);
         }
 
@@ -24,9 +24,9 @@ namespace WebAdressbookTests
         public void GroupCreationTest2()
         {
 
-            GroupData group = new GroupData("");
-            group.Header = "";
-            group.Footer = "";
+            GroupData group = new GroupData("111111111");
+            group.Header = null;
+            group.Footer = null;
             app.Groups.Create(group);
         }
     }

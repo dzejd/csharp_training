@@ -73,10 +73,8 @@ namespace WebAdressbookTests
 
         public ContactHelper InitContactCreation(NewContactData newContact)
         {
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(newContact.FirstName);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(newContact.LastName);
+            Type(By.Name("firstname"), newContact.FirstName);
+            Type(By.Name("lastname"), newContact.LastName);
             return this;
         }
 

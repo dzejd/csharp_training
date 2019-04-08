@@ -12,7 +12,7 @@ namespace WebAdressbookTests
 {
     [TestFixture]
 
-    public class GroupModificationTest : TestBase
+    public class GroupModificationTest : AuthTestBase
     {
         [Test]
 
