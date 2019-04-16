@@ -33,8 +33,7 @@ namespace WebAdressbookTests
             Type(By.Name("pass"), account.Password);
             driver.FindElement(By.XPath("//input[@value='Login']")).Click();
         }
-
-
+        
         public void Logout()
         {
             if (IsLoggedIn())

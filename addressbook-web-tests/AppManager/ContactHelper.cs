@@ -48,9 +48,22 @@ namespace WebAdressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            if (IsNoOneContactHere())
+            {
+                AddNewContact();
+            }
+            else
+            {
+                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            }
             return this;
         }
+
+        public bool IsNoOneContactHere()
+        {
+            return IsElementPresent(By.XPath("//snap[@id='search_count'[0]]"));
+        }
+
 
         public ContactHelper MainTableSelection(int numb)
         {
