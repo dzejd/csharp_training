@@ -19,7 +19,7 @@ namespace WebAdressbookTests
 
         public ContactHelper CreateMember(NewContactData member)
         {
-            manager.Navigator.GoToGroupPage();
+            manager.Navigator.GoToHomePage();
             AddNewContact();
             InitContactCreation(member);
             SubmitAdd();
@@ -30,6 +30,7 @@ namespace WebAdressbookTests
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();
+            AddContactIfNotFound();
             SelectContact(v);
             RemoveCont();
             BackHome();
@@ -39,6 +40,8 @@ namespace WebAdressbookTests
         public ContactHelper Modify(NewContactData newContact)
         {
             manager.Navigator.GoToHomePage();
+            AddContactIfNotFound();
+            SelectContact(1);
             InitContactModification();
             InitContactCreation(newContact);
             UpdateContactInfo();
@@ -46,24 +49,17 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact(int index)
+        public ContactHelper SearchCountOnPage()
         {
-            if (IsNoOneContactHere())
-            {
-                AddNewContact();
-            }
-            else
-            {
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-            }
+            driver.FindElement(By.XPath("//span[@name='search_count'])[0]"));
             return this;
         }
 
-        public bool IsNoOneContactHere()
+        public ContactHelper SelectContact(int index)
         {
-            return IsElementPresent(By.XPath("//snap[@id='search_count'[0]]"));
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
         }
-
 
         public ContactHelper MainTableSelection(int numb)
         {
@@ -115,7 +111,19 @@ namespace WebAdressbookTests
             return this;
         }
 
+        public void AddContactIfNotFound()
+        {
+            if (IsContactExist())
+            {
+                return;
+            }
+            NewContactData randomContact = new NewContactData("FirstName");
+            CreateMember(randomContact);
+        }
+
+        private bool IsContactExist()
+        {
+            return IsElementPresent(By.Name("selected[]"));
+        }
     }
-
-
 }

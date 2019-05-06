@@ -20,7 +20,7 @@ namespace WebAdressbookTests
         {
             NewContactData newMember = new NewContactData("verter");
             newMember.FirstName = null;
-            newMember.LastName = null;
+            newMember.LastName = "aqwe";
 
             app.Contacts.Modify(newMember);
         }
