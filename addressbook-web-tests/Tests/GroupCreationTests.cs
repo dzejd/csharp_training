@@ -19,14 +19,44 @@ namespace WebAdressbookTests
             group.Header = "awshrdsh";
             group.Footer = "sarg";
 
-         //   List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
 
-         //   List<GroupData> newGroups = app.Groups.GetGroupList();
-         //   Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
 
-        }        
+        }
+
+        [Test]
+        public void GroupCreationTest2()
+        {
+            GroupData group = new GroupData("111111111");
+            group.Header = "asfnh";
+            group.Footer = "shjdtk";
+
+           // List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Create(group);
+
+          //  List<GroupData> newGroups = app.Groups.GetGroupList();
+          //  Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+        }
+
+        [Test]
+        public void BadNameGroupCreationTest2()
+        {
+            GroupData group = new GroupData("'a'");
+            group.Header = "1111";
+            group.Footer = "2222";
+
+          //  List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Create(group);
+
+          //  List<GroupData> newGroups = app.Groups.GetGroupList();
+          //  Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+        }
     }
 }
 

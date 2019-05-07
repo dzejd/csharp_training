@@ -26,7 +26,6 @@ namespace WebAdressbookTests
             return this;
         }
 
-
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
@@ -48,6 +47,19 @@ namespace WebAdressbookTests
             RemoveGroup();
             ReturnGroupPage();
             return this;
+        }
+
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+
+            return groups;
         }
 
         public GroupHelper ReturnHomePage()
