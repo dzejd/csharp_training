@@ -30,7 +30,6 @@ namespace WebAdressbookTests
         public ContactHelper Remove()
         {
             manager.Navigator.GoToHomePage();
-            AddContactIfNotFound();
             SelectContact();
             RemoveCont();
             BackHome();
@@ -40,7 +39,6 @@ namespace WebAdressbookTests
         public ContactHelper Modify(NewContactData newContact)
         {
             manager.Navigator.GoToHomePage();
-            AddContactIfNotFound();
             SelectContact();
             InitContactModification();
             InitContactCreation(newContact);
@@ -126,19 +124,9 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public void AddContactIfNotFound()
+        public bool IsContactExist()
         {
-            if (IsContactExist())
-            {
-                return;
-            }
-            NewContactData randomContact = new NewContactData("FirstName");
-            CreateMember(randomContact);
-        }
-
-        private bool IsContactExist()
-        {
-            return IsElementPresent(By.Name("selected[]"));
+            return IsElementPresent(By.XPath("(//img[@alt='Edit'])[" + (1) + "]"));
         }
     }
 }

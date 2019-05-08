@@ -29,7 +29,6 @@ namespace WebAdressbookTests
         public GroupHelper Modify(int v, GroupData newData)
         {
             manager.Navigator.GoToGroupPage();
-            AddCGroupIfNotFound();
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -42,7 +41,6 @@ namespace WebAdressbookTests
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupPage();
-            AddCGroupIfNotFound();
             SelectGroup(v);
             RemoveGroup();
             ReturnHomePage();
@@ -58,7 +56,6 @@ namespace WebAdressbookTests
             {
                 groups.Add(new GroupData(element.Text));
             }
-
             return groups;
         }
 
@@ -103,7 +100,7 @@ namespace WebAdressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -119,19 +116,9 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public void AddCGroupIfNotFound()
+        public bool IsGroupExist()
         {
-            if (IsGroupExist())
-            {
-                return;
-            }
-            GroupData randomGroup = new GroupData("Group_name");
-            Create(randomGroup);
-        }
-
-        private bool IsGroupExist()
-        {
-            return IsElementPresent(By.Name("selected[]"));
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (1) + "]"));
         }
     }
 }

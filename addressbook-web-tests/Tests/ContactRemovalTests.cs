@@ -18,7 +18,18 @@ namespace WebAdressbookTests
 
         public void ContactRemovalTests()
         {
-            app.Contacts.Remove();
+            if (!app.Contacts.IsContactExist())
+            {
+                NewContactData member = new NewContactData("aaa");
+                member.FirstName = "sss";
+                member.LastName = "ddd";
+                app.Contacts.CreateMember(member);
+            }
+            app.Groups.Remove(0);
         }
+
     }
 }
+
+
+

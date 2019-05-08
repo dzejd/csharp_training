@@ -22,7 +22,24 @@ namespace WebAdressbookTests
             newMember.FirstName = null;
             newMember.LastName = "aqwe";
 
+            if (!app.Contacts.IsContactExist())
+            {
+                NewContactData contact = new NewContactData("qqq", "www");
+                app.Contacts.CreateMember(contact);
+            }
             app.Contacts.Modify(newMember);
         }
+
+
+
+        /* [Test]
+
+         public void ContactModificationTest()
+         {
+             NewContactData newMember = new NewContactData("verter");
+             newMember.FirstName = null;
+             newMember.LastName = "aqwe";
+
+             app.Contacts.Modify(newMember); */
     }
 }
