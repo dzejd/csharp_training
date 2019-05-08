@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -27,11 +27,11 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper Remove(int v)
+        public ContactHelper Remove()
         {
             manager.Navigator.GoToHomePage();
             AddContactIfNotFound();
-            SelectContact(v);
+            SelectContact();
             RemoveCont();
             BackHome();
             return this;
@@ -41,12 +41,27 @@ namespace WebAdressbookTests
         {
             manager.Navigator.GoToHomePage();
             AddContactIfNotFound();
-            SelectContact(1);
+            SelectContact();
             InitContactModification();
             InitContactCreation(newContact);
             UpdateContactInfo();
             manager.Navigator.BackHomePage();
             return this;
+        }
+
+        public List<NewContactData> GetContactsList()
+        {
+            List<NewContactData> contact = new List<NewContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+            foreach (IWebElement element in elements)
+            {
+                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
+
+                NewContactData contactInList = new NewContactData(cells[2].Text, cells[1].Text);
+                contact.Add(contactInList);
+            }
+            return contact;
         }
 
         public ContactHelper SearchCountOnPage()
@@ -55,9 +70,9 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper SelectContact(int index)
+        public ContactHelper SelectContact()
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
 

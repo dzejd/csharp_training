@@ -20,7 +20,16 @@ namespace WebAdressbookTests
             NewContactData member = new NewContactData("IvanovIvanIvanovich");
             member.FirstName = null;
             member.LastName = null;
+
+            List<NewContactData> oldContacts = app.Contacts.GetContactsList();
+
             app.Contacts.CreateMember(member);
+
+            List<NewContactData> newContacts = app.Contacts.GetContactsList();
+            oldContacts.Add(member);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

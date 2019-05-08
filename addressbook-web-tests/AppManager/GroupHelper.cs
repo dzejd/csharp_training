@@ -22,7 +22,7 @@ namespace WebAdressbookTests
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
-            ReturnGroupPage();
+            ReturnHomePage();
             return this;
         }
 
@@ -45,7 +45,7 @@ namespace WebAdressbookTests
             AddCGroupIfNotFound();
             SelectGroup(v);
             RemoveGroup();
-            ReturnGroupPage();
+            ReturnHomePage();
             return this;
         }
 
@@ -103,7 +103,7 @@ namespace WebAdressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
