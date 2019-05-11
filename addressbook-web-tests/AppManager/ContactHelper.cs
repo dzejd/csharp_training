@@ -66,8 +66,7 @@ namespace WebAdressbookTests
                 foreach (IWebElement element in elements)
                 {
                     IList<IWebElement> someValue = element.FindElements(By.TagName("td"));
-                    contCash.Add(new ContactData(someValue[2].Text, someValue[1].Text)
-                    { Id = element.FindElement(By.TagName("center")).GetAttribute("value") });
+                    ContactData listContacts = new ContactData(someValue[2].Text, someValue[1].Text);
                     contCash.Add(new ContactData(someValue[2].Text, someValue[1].Text));
                 }
             }
