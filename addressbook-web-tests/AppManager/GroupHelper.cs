@@ -18,7 +18,7 @@ namespace WebAdressbookTests
 
         public GroupHelper Create(GroupData group)
         {
-            manager.Navigator.GoToGroupPage();
+            managerApp.Navigator.GoToGroupPage();
             InitNewGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
@@ -28,7 +28,7 @@ namespace WebAdressbookTests
 
         public GroupHelper Modify(int v, GroupData newData)
         {
-            manager.Navigator.GoToGroupPage();
+            managerApp.Navigator.GoToGroupPage();
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newData);
@@ -40,7 +40,7 @@ namespace WebAdressbookTests
 
         public GroupHelper Remove(int v)
         {
-            manager.Navigator.GoToGroupPage();
+            managerApp.Navigator.GoToGroupPage();
             SelectGroup(v);
             RemoveGroup();
             ReturnHomePage();
@@ -50,7 +50,7 @@ namespace WebAdressbookTests
         public List<GroupData> GetGroupList()
         {
             List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoToGroupPage();
+            managerApp.Navigator.GoToGroupPage();
             ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
             foreach (IWebElement element in elements)
             {

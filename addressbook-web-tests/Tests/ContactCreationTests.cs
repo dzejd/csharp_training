@@ -17,15 +17,13 @@ namespace WebAdressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            NewContactData member = new NewContactData("IvanovIvanIvanovich");
-            member.FirstName = null;
-            member.LastName = null;
-
-            List<NewContactData> oldContacts = app.Contacts.GetContactsList();
+            ContactData member = new ContactData("Sozdanie", "Kontacta");
+            
+            List<ContactData> oldContacts = app.Contacts.GetContactsList();
 
             app.Contacts.CreateMember(member);
 
-            List<NewContactData> newContacts = app.Contacts.GetContactsList();
+            List<ContactData> newContacts = app.Contacts.GetContactsList();
             oldContacts.Add(member);
             oldContacts.Sort();
             newContacts.Sort();

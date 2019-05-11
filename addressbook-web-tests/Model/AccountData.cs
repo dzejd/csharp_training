@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace WebAdressbookTests
 {
-    public class AccountData
+    public class AccountDate
     {
         private string username;
         private string password;
 
-        public AccountData(string username, string password)
+        public AccountDate(string username, string password)
         {
             this.username = username;
             this.password = password;

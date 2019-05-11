@@ -18,7 +18,7 @@ namespace WebAdressbookTests
         {
         }
 
-        public void Login(AccountData account)
+        public void Login(AccountDate account)
         {
             if (IsLoggedIn())
             {
@@ -47,7 +47,7 @@ namespace WebAdressbookTests
             return IsElementPresent(By.Name("logout"));
         }
 
-        public bool IsLoggedIn(AccountData account)
+        public bool IsLoggedIn(AccountDate account)
         {
             return IsLoggedIn()
                 && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text == "("+ account.Username + ")";

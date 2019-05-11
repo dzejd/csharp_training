@@ -25,10 +25,8 @@ namespace WebAdressbookTests
             app.Groups.Remove(0);
         }
 
-
-
-        /* [Test]
-        public void GroupRemovalTest()
+        [Test]
+        public void GroupRemovalTest2()
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
@@ -37,7 +35,8 @@ namespace WebAdressbookTests
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
             oldGroups.RemoveAt(0);
-            Assert.AreEqual(oldGroups, newGroups); */
+            Assert.AreEqual(oldGroups, newGroups);
+        }
     }
 }
 

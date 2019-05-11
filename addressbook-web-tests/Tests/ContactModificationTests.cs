@@ -18,13 +18,13 @@ namespace WebAdressbookTests
 
         public void ContactModificationTest()
         {
-            NewContactData newMember = new NewContactData("verter");
-            newMember.FirstName = null;
-            newMember.LastName = "aqwe";
+            ContactData newMember = new ContactData("Exersize", "9");
+            newMember.FirstName = "Modifikaciya";
+            newMember.LastName = "Kontacta";
 
             if (!app.Contacts.IsContactExist())
             {
-                NewContactData contact = new NewContactData("qqq", "www");
+                ContactData contact = new ContactData("Exersize", "9-1");
                 app.Contacts.CreateMember(contact);
             }
             app.Contacts.Modify(newMember);
@@ -32,14 +32,27 @@ namespace WebAdressbookTests
 
 
 
-        /* [Test]
+        [Test]
 
-         public void ContactModificationTest()
-         {
-             NewContactData newMember = new NewContactData("verter");
-             newMember.FirstName = null;
-             newMember.LastName = "aqwe";
+        public void ContactModificationTest2()
+        {
+            ContactData newContacts = new ContactData("Exersize", "9-2");
+            newContacts.FirstName = "ZamenaImeni";
+            newContacts.LastName = "ZamenaFamilii";
 
-             app.Contacts.Modify(newMember); */
+            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+
+            app.Contacts.Modify(newContacts);
+
+            List<ContactData> newListContats = app.Contacts.GetContactsList();
+
+            oldContacts[0].FirstName = newContacts.FirstName;
+            oldContacts[0].LastName = newContacts.LastName;
+
+            oldContacts.Sort();
+            newListContats.Sort();
+
+            Assert.AreEqual(oldContacts, newListContats);
+        }
     }
 }

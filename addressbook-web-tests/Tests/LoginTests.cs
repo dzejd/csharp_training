@@ -21,7 +21,7 @@ namespace WebAdressbookTests
             app.Auth.Logout();
 
             //action
-            AccountData account = new AccountData("admin", "secret");
+            AccountDate account = new AccountDate("admin", "secret");
             app.Auth.Login(account);
 
             //verification
@@ -36,7 +36,7 @@ namespace WebAdressbookTests
             app.Auth.Logout();
 
             //action
-            AccountData account = new AccountData("admin", "desh");
+            AccountDate account = new AccountDate("admin", "desh");
             app.Auth.Login(account);
 
             //verification

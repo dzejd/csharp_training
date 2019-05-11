@@ -30,8 +30,14 @@ namespace WebAdressbookTests
                 app.Groups.Create(group);
             }
             app.Groups.Modify(1, newData);
+        }
 
-           /* GroupData newData = new GroupData("fykfky");
+        [Test]
+
+        public void GroupModificationTests2()
+        {
+
+            GroupData newData = new GroupData("fykfky");
             newData.Header = null;
             newData.Footer = null;
 
@@ -43,7 +49,8 @@ namespace WebAdressbookTests
             oldGroups[0].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);*/
+            Assert.AreEqual(oldGroups, newGroups);
         }
+
     }
 }

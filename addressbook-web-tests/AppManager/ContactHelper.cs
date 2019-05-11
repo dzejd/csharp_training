@@ -17,47 +17,47 @@ namespace WebAdressbookTests
         {
         }
 
-        public ContactHelper CreateMember(NewContactData member)
+        public ContactHelper CreateMember(ContactData member)
         {
-            manager.Navigator.GoToHomePage();
+            managerApp.Navigator.GoToHomePage();
             AddNewContact();
             InitContactCreation(member);
             SubmitAdd();
-            manager.Navigator.BackHomePage();
+            managerApp.Navigator.BackHomePage();
             return this;
         }
 
         public ContactHelper Remove()
         {
-            manager.Navigator.GoToHomePage();
+            managerApp.Navigator.GoToHomePage();
             SelectContact();
             RemoveCont();
             BackHome();
             return this;
         }
 
-        public ContactHelper Modify(NewContactData newContact)
+        public ContactHelper Modify(ContactData newContact)
         {
-            manager.Navigator.GoToHomePage();
+            managerApp.Navigator.GoToHomePage();
             SelectContact();
             InitContactModification();
             InitContactCreation(newContact);
             UpdateContactInfo();
-            manager.Navigator.BackHomePage();
+            managerApp.Navigator.BackHomePage();
             return this;
         }
 
-        public List<NewContactData> GetContactsList()
+        public List<ContactData> GetContactsList()
         {
-            List<NewContactData> contact = new List<NewContactData>();
-            manager.Navigator.GoToHomePage();
+            List<ContactData> contact = new List<ContactData>();
+            managerApp.Navigator.GoToHomePage();
+
             ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
-                IList<IWebElement> cells = element.FindElements(By.TagName("td"));
-
-                NewContactData contactInList = new NewContactData(cells[2].Text, cells[1].Text);
-                contact.Add(contactInList);
+                IList<IWebElement> someValue = element.FindElements(By.TagName("td"));
+                ContactData listContacts = new ContactData(someValue[2].Text, someValue[1].Text);
+                contact.Add(listContacts);
             }
             return contact;
         }
@@ -93,7 +93,7 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper InitContactCreation(NewContactData newContact)
+        public ContactHelper InitContactCreation(ContactData newContact)
         {
             Type(By.Name("firstname"), newContact.FirstName);
             Type(By.Name("lastname"), newContact.LastName);

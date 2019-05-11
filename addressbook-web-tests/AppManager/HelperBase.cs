@@ -12,13 +12,13 @@ namespace WebAdressbookTests
 {
     public class HelperBase
     {
-        public ApplicationManager manager { get; }
+        public ApplicationManager managerApp { get; }
 
         protected IWebDriver driver;
 
         public HelperBase(ApplicationManager manager)
         {
-            this.manager = manager;
+            this.managerApp = manager;
             driver = manager.Driver;
         }
 

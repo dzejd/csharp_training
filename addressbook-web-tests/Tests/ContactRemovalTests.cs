@@ -20,12 +20,24 @@ namespace WebAdressbookTests
         {
             if (!app.Contacts.IsContactExist())
             {
-                NewContactData member = new NewContactData("aaa");
-                member.FirstName = "sss";
-                member.LastName = "ddd";
+                ContactData member = new ContactData("SodanieDlya", "Udaleniya");
+                member.FirstName = "SodanieDlya1";
+                member.LastName = "Udaleniya1";
                 app.Contacts.CreateMember(member);
             }
-            app.Groups.Remove(0);
+
+            List<ContactData> oldContacts = app.Contacts.GetContactsList();
+            app.Contacts.Remove();
+            List<ContactData> newContacts = app.Contacts.GetContactsList();
+            oldContacts.RemoveAt(0);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+
+
+
+
+
         }
 
     }
