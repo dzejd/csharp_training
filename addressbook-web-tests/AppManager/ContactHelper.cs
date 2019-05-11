@@ -47,19 +47,31 @@ namespace WebAdressbookTests
             return this;
         }
 
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.Name("entry")).Count;
+        }
+
+        private List<ContactData> contCash = null;
+
         public List<ContactData> GetContactsList()
         {
-            List<ContactData> contact = new List<ContactData>();
-            managerApp.Navigator.GoToHomePage();
-
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
+            if (contCash == null)
             {
-                IList<IWebElement> someValue = element.FindElements(By.TagName("td"));
-                ContactData listContacts = new ContactData(someValue[2].Text, someValue[1].Text);
-                contact.Add(listContacts);
+                contCash = new List<ContactData>();
+                List<ContactData> contact = new List<ContactData>();
+                managerApp.Navigator.GoToHomePage();
+
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
+                {
+                    IList<IWebElement> someValue = element.FindElements(By.TagName("td"));
+                    contCash.Add(new ContactData(someValue[2].Text, someValue[1].Text)
+                    { Id = element.FindElement(By.TagName("center")).GetAttribute("value") });
+                    contCash.Add(new ContactData(someValue[2].Text, someValue[1].Text));
+                }
             }
-            return contact;
+            return new List<ContactData>(contCash);
         }
 
         public ContactHelper SearchCountOnPage()
@@ -84,6 +96,7 @@ namespace WebAdressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            contCash = null;
             return this;
         }
 
@@ -103,6 +116,7 @@ namespace WebAdressbookTests
         public ContactHelper SubmitAdd()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contCash = null;
             return this;
         }
 
@@ -115,6 +129,7 @@ namespace WebAdressbookTests
         public ContactHelper InitContactModification()
         {
             driver.FindElement(By.XPath("(//img[@alt='Edit'])")).Click();
+            contCash = null;
             return this;
         }
 

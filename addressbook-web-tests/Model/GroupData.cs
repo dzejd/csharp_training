@@ -6,15 +6,11 @@ using System.Threading.Tasks;
 
 namespace WebAdressbookTests
 {
-    public class GroupData : IEquatable<GroupData>, IComparable<GroupData> 
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string name;
-        private string header;
-        private string footer;
-
         public GroupData(string name)
         {
-            this.name = name;
+            Name = name;
         }
 
         public bool Equals(GroupData other)
@@ -42,52 +38,19 @@ namespace WebAdressbookTests
 
         public int CompareTo(GroupData other)
         {
-            if(object.ReferenceEquals(other, null))
+            if (object.ReferenceEquals(other, null))
             {
                 return 1;
             }
             return Name.CompareTo(other.Name);
         }
 
-        public string Name
-        {
-            get
-            {
-                return name;
-            }
+        public string Name { get; set; }
 
-            set
-            {
-                name = value;
-            }
-        }
+        public string Header { get; set; }
 
-        public string Header
-        {
-            get
-            {
-                return header;
-            }
+        public string Footer { get; set; }
 
-            set
-            {
-                header = value;
-            }
-
-        }
-
-        public string Footer
-        {
-            get
-            {
-                return footer;
-            }
-
-            set
-            {
-                footer = value;
-            }
-
-        }
+        public string Id { get; set; }
     }
 }

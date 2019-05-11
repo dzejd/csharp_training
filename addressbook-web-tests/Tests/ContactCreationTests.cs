@@ -23,6 +23,8 @@ namespace WebAdressbookTests
 
             app.Contacts.CreateMember(member);
 
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
+            
             List<ContactData> newContacts = app.Contacts.GetContactsList();
             oldContacts.Add(member);
             oldContacts.Sort();

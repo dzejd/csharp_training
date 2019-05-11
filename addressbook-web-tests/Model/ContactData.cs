@@ -14,8 +14,8 @@ namespace WebAdressbookTests
 
         public ContactData(string firstname, string lastname)
         {
-            this.firstname = firstname;
-            this.lastname = lastname;
+            FirstName = firstname;
+            LastName = lastname;
         }
 
         public int CompareTo(ContactData other)
@@ -60,30 +60,10 @@ namespace WebAdressbookTests
             return FirstName + LastName;
         }
 
-        public string FirstName
-        {
-            get
-            {
-                return firstname;
-            }
+        public string FirstName { get; set; }
 
-            set
-            {
-                firstname = value;
-            }
-        }
+        public string LastName { get; set; }
 
-        public string LastName
-        {
-            get
-            {
-                return lastname;
-            }
-
-            set
-            {
-                lastname = value;
-            }
-        }
+        public string Id { get; set; }
     }
 }
