@@ -29,9 +29,7 @@ namespace WebAdressbookTests
             }
             app.Contacts.Modify(newMember);
         }
-
-
-
+        
         [Test]
 
         public void ContactModificationTest2()
