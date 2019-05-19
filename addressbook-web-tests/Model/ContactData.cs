@@ -109,7 +109,7 @@ namespace WebAdressbookTests
                 }
                 else
                 {
-                    return (CleanUp(Email1) + CleanUp(Email2) + CleanUp(Email3)).Trim();
+                    return (CleanUpEmail(Email1) + CleanUpEmail(Email2) + CleanUpEmail(Email3)).Trim();
                 }
             }
             set
@@ -125,10 +125,16 @@ namespace WebAdressbookTests
                 return "";
             }
             return Regex.Replace(phone, "[ -()]", "") + "\r\n";
-            //phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
 
         }
 
-
+        private string CleanUpEmail(string mail)
+        {
+            if (mail == null)
+            {
+                return "";
+            }
+            return Regex.Replace(mail, "[ -()]", "") + "\r\n";
+        }
     }
 }
