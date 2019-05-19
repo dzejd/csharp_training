@@ -57,7 +57,7 @@ namespace WebAdressbookTests
 
         public override string ToString()
         {
-            return FirstName + LastName;
+            return FirstName + "\nfirstname=" + LastName + "\nlastname=";
         }
 
         public string Id { get; set; }
