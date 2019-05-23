@@ -51,6 +51,7 @@ namespace WebAdressbookTests
 
         public static IEnumerable<GroupData> GroupDataFromXmlFile()
         {
+            List<GroupData> groups = new List<GroupData>();
             return (List<GroupData>)
                 new XmlSerializer(typeof(List<GroupData>))
                 .Deserialize(new StreamReader(@"groups.xml"));
@@ -68,7 +69,7 @@ namespace WebAdressbookTests
             Excel.Application app = new Excel.Application();
             app.Visible = true;
             Excel.Workbook wb = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
-            Excel.Worksheet sheet = wb.ActiveSheet;
+            Excel.Worksheet sheet = wb.Sheets[1];
             Excel.Range range = sheet.UsedRange;
             for (int i = 1; i <= range.Rows.Count; i++) 
             {
