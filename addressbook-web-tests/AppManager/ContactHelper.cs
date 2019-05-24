@@ -27,24 +27,81 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper Remove()
+                public ContactHelper Remove(ContactData contact)
         {
             managerApp.Navigator.GoToHomePage();
-            SelectContact();
+            SelectContact(contact.Id);
             RemoveCont();
             BackHome();
             return this;
         }
 
-        public ContactHelper Modify(ContactData newContact)
+        public ContactHelper Modify(ContactData oldData, ContactData newContact)
         {
             managerApp.Navigator.GoToHomePage();
             SelectContact();
-            InitContactModification();
+            InitContactModification(oldData.Id);
             InitContactCreation(newContact);
             UpdateContactInfo();
             managerApp.Navigator.BackHomePage();
             return this;
+        }
+
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            managerApp.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void DeleteContactFromGroup(ContactData contact, string groupId)
+        {
+            managerApp.Navigator.GoToHomePage();
+            GoToPageContactDataView(contact.Id);
+            GoToGroupPage(groupId);
+            SelectContact(contact.Id);
+            InitRemoveContactFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void InitRemoveContactFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        private void GoToGroupPage(string groupId)
+        {
+            driver.FindElement(By.XPath("//a[@href='./index.php?group=" + groupId + "']")).Click();
+        }
+
+        private void GoToPageContactDataView(string id)
+        {
+            driver.FindElement(By.XPath("//a[@href='view.php?id=" + id + "']")).Click();
+        }
+
+        public void SelectContact(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
 
         public int GetContactCount()
@@ -95,6 +152,8 @@ namespace WebAdressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            IWebElement element = driver.FindElement(By.CssSelector("div.msgbox"));
             contCash = null;
             return this;
         }
@@ -125,10 +184,9 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification()
+        public ContactHelper InitContactModification(string id)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])")).Click();
-            contCash = null;
+            driver.FindElement(By.XPath("//a[@href='edit.php?id=" + id + "']")).Click();
             return this;
         }
 
@@ -202,7 +260,7 @@ namespace WebAdressbookTests
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
             string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value");
             string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value");
-            string contactInformation = (firstName + " ") + (lastName + " ") + address  + homePhone + mobilePhone + workPhone + email + email2 + email3;
+            string contactInformation = (firstName + " ") + (lastName + " ") + address + homePhone + mobilePhone + workPhone + email + email2 + email3;
 
             return CleanUpText(contactInformation).Trim();
         }
@@ -247,5 +305,12 @@ namespace WebAdressbookTests
             Match m = new Regex(@"\d+").Match(iText);
             return Int32.Parse(m.Value);
         }
+
+        public bool IsContactPresent()
+        {
+            managerApp.Navigator.GoToHomePage();
+            return IsElementPresent(By.XPath("(//img[@alt='Edit'])[" + (1) + "]"));
+        }
+
     }
 }

@@ -12,46 +12,35 @@ namespace WebAdressbookTests
 {
     [TestFixture]
 
-    public class GroupModificationTest : AuthTestBase
+    public class GroupModificationTest : GroupTestBase
     {
         [Test]
 
         public void GroupModificationTests()
-        {
-            GroupData newData = new GroupData("Group_Name_1");
-            newData.Header = null;
-            newData.Footer = null;
-
-            if (!app.Groups.IsGroupExist())
-            {
-                GroupData group = new GroupData("Group_Name_");
-                group.Header = "";
-                group.Footer = "";
-                app.Groups.Create(group);
-            }
-            app.Groups.Modify(1, newData);
-        }
-
-        [Test]
-
-        public void GroupModificationTests2()
         {
 
             GroupData newData = new GroupData("fykfky");
             newData.Header = null;
             newData.Footer = null;
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
+            if (!app.Groups.IsGroupExist())
+            {
+                GroupData group = new GroupData("aaa");
+                group.Header = "sss";
+                group.Footer = "ddd";
+                app.Groups.Create(group);
+                oldGroups = app.Groups.GetGroupList();
+            }
             GroupData oldData = oldGroups[0];
 
-            app.Groups.Modify(0, newData);
+            app.Groups.Modify(oldData, newData);
+
             Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups[0].Name = newData.Name;
+            List<GroupData> newGroups = GroupData.GetAll();
             oldGroups.Sort();
             newGroups.Sort();
-            
             Assert.AreEqual(oldGroups, newGroups);
 
             foreach (GroupData group in newGroups)
@@ -62,6 +51,5 @@ namespace WebAdressbookTests
                 }
             }
         }
-
     }
 }

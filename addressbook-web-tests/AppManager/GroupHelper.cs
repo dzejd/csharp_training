@@ -26,10 +26,10 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(GroupData oldData, GroupData newData)
         {
             managerApp.Navigator.GoToGroupPage();
-            SelectGroup(v);
+            SelectGroup(oldData.Id);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -38,10 +38,10 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public GroupHelper Remove(int v)
+        public GroupHelper Remove(GroupData group)
         {
             managerApp.Navigator.GoToGroupPage();
-            SelectGroup(v);
+            SelectGroup(group.Id);
             RemoveGroup();
             ReturnHomePage();
             return this;
@@ -70,23 +70,21 @@ namespace WebAdressbookTests
                 string allGroupNames = driver.FindElement(By.CssSelector("div#content form")).Text;
                 string[] parts = allGroupNames.Split('\n');
                 int shift = groupCash.Count - parts.Length;
-                    for (int i = 0; i < groupCash.Count; i++)
+                for (int i = 0; i < groupCash.Count; i++)
                 {
-                    if(i < shift)
+                    if (i < shift)
                     {
                         groupCash[i].Name = "";
                     }
                     else
                     {
-                        groupCash[i].Name = parts[i-shift].Trim();
+                        groupCash[i].Name = parts[i - shift].Trim();
                     }
                     groupCash[i].Name = parts[i].Trim();
                 }
             }
             return new List<GroupData>(groupCash);
         }
-
-        
 
         public GroupHelper ReturnHomePage()
         {
@@ -129,9 +127,9 @@ namespace WebAdressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup(string id)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='" + id + "'])")).Click();
             return this;
         }
 
