@@ -1,15 +1,19 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using NUnit.Framework;
+using System.IO;
 
 namespace Mantis_tests
 {
     [TestFixture]
+
     public class AccountCreationTests : TestBase
     {
         [TestFixtureSetUp]
+
         public void setUPConfig()
         {
             app.Ftp.BackupFile("/config_inc.php");
@@ -17,9 +21,10 @@ namespace Mantis_tests
             {
                 app.Ftp.Upload("/config_inc.php", localFile);
             }
-
         }
+
         [Test]
+
         public void TestAccountRegistration()
         {
             AccountData account = new AccountData()
@@ -28,11 +33,12 @@ namespace Mantis_tests
                 Password = "password",
                 Email = "testuser@localhost.localdomain"
             };
-
+            List<AccountData> accounts = app.Admin.GetAllAccounts();
             app.Registration.Register(account);
         }
 
         [TestFixtureTearDown]
+
         public void restoreConfig()
         {
             app.Ftp.RestoreBackupFile("/config_inc.php");

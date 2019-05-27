@@ -34,6 +34,7 @@ namespace Mantis_tests
             driver.FindElement(By.Name("email")).SendKeys(account.Email);
 
         }
+
         private void SubmitRegistration()
         {
             driver.FindElement(By.XPath("//input[@value='Зарегистрироваться']")).Click();

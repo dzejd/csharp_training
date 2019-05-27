@@ -9,9 +9,11 @@ using System.IO;
 namespace Mantis_tests
 {
     [TestFixture]
+
     public class ProjectRemovalTests : TestBase
     {
         [Test]
+
         public void ProjectRemovalTest()
         {
             AccountData account = new AccountData()
@@ -21,7 +23,12 @@ namespace Mantis_tests
             };
             app.Login.Login(account);
             app.Menu.MenuProjects();
-            app.Project.DeleteProject(0);
+            app.Project.ProjectExistanceCheck(account);
+            List<ProjectData> oldProjects = app.API.GetProjects(account);
+            app.Project.DeleteProject(account, 0);
+            List<ProjectData> newProjects = app.API.GetProjects(account);
+            oldProjects.RemoveAt(0);
+            Assert.AreEqual(oldProjects, newProjects);
         }
     }
 }

@@ -18,9 +18,8 @@ namespace Mantis_tests
             SubmitCreation();
         }
 
-        public void DeleteProject(int id)
+        public void DeleteProject(AccountData account, int id)
         {
-            ProjectExistanceCheck();
             OpenProject(id);
             InitDeleteProject();
             SubmitRemoval();
@@ -42,16 +41,16 @@ namespace Mantis_tests
             driver.FindElement(By.XPath("//input[@value='Add Project']")).Click();
         }
 
-        public void ProjectExistanceCheck()
+        public void ProjectExistanceCheck(AccountData account)
         {
-            if (driver.FindElement(By.TagName("tbody")).FindElements(By.TagName("a")).Count() == 0)
+            if (manager.API.GetProjects(account).Count() == 0)
             {
                 ProjectData project = new ProjectData()
                 {
                     Name = "AutoProjectName",
                     Description = "AutoDescription"
                 };
-                CreateProject(project);
+                manager.API.CreateProjectForRemove(account, project);
                 manager.Driver.Url = "http://localhost/mantisbt-2.4.1/manage_proj_page.php";
             };
         }
